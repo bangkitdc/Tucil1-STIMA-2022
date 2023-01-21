@@ -374,7 +374,11 @@ void app() {
 	input2 = inputOneTwo();
 
 	if (input2 == 1) {
-		cout << endl << GREEN << s.size() << " Solutions Found" << RESET << endl;
+		if (s.size() != 0) {
+			cout << endl << GREEN << s.size() << " Solutions Found" << RESET << endl;
+		} else {
+			cout << endl << GREEN << "No Solutions Found" << RESET << endl;
+		}
 
 		std::set< std::vector<int> >::iterator it;
 		for (it = s.begin(); it != s.end(); it++) {
@@ -406,7 +410,11 @@ void app() {
 		ofstream MyFile("../test/" + filename + ".txt");
 
 		// Write ke file
-		MyFile << s.size() << " solutions found" << endl;
+		if (s.size() != 0) {
+			MyFile << s.size() << " Solutions Found" << endl;
+		} else {
+			MyFile << "No Solutions Found" << endl;
+		}
 
 		std::set< std::vector<int> >::iterator itr;
 		for (itr = s.begin(); itr != s.end(); itr++) {

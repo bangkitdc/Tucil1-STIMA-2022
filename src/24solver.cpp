@@ -285,10 +285,10 @@ void command3() {
 	/* LIST COMMAND 3 */
 
 	cout << endl << WHITE << "==========================================" << endl;
-    cout << RED <<   "=  Where do you want to see the result?  =" << endl;
+    cout << RED <<           "=       Do you want to save file?        =" << endl;
     cout << WHITE << "==========================================" << endl;
-    cout << RED << "[1]" << WHITE <<" Console" << endl;
-    cout << RED << "[2]" << WHITE <<" File" << endl;
+    cout << RED << "[1]" << WHITE <<" Yes" << endl;
+    cout << RED << "[2]" << WHITE <<" No" << endl;
 }
 
 void app() {
@@ -368,86 +368,82 @@ void app() {
     fsec fs = t1 - t0;
     ns exec = std::chrono::duration_cast<ns>(fs);
 
-	command3();
-    int input2;
-
-	input2 = inputOneTwo();
-
-	if (input2 == 1) {
-		if (s.size() != 0) {
-			cout << endl << GREEN << s.size() << " Solutions Found" << RESET << endl;
-		} else {
-			cout << endl << GREEN << "No Solutions Found" << RESET << endl;
-		}
-
-		std::set< std::vector<int> >::iterator it;
-		for (it = s.begin(); it != s.end(); it++) {
-			const std::vector<int>& x = (*it);
-			switch (x[0]) {
-				case 0:
-					cout << "(" << numToString(x[1]) << " " << operators[x[2]] << " " << numToString(x[3]) << ") " << operators[x[4]] << " (" << numToString(x[5]) << " " << operators[x[6]] << " " << numToString(x[7]) << ")" << endl;
-					break;
-				case 1:
-					cout << "(("<< numToString(x[1]) << " " << operators[x[2]] << " " << numToString(x[3]) << ") " << operators[x[4]] << " " << numToString(x[5]) << ") " << operators[x[6]] << " " << numToString(x[7]) << endl;
-					break;
-				case 2:
-					cout << "(" << numToString(x[1]) << " " << operators[x[2]] << " (" << numToString(x[3]) << " " << operators[x[4]] << " " << numToString(x[5]) << ")) " << operators[x[6]] << " " << numToString(x[7]) << endl;
-					break;
-				case 3:
-					cout << numToString(x[1]) << " " << operators[x[2]] << " " << "(" << numToString(x[3]) << " " << operators[x[4]] << " (" << numToString(x[5]) << " " << operators[x[6]] << " " << numToString(x[7]) << "))" << endl;
-					break;
-				case 4:
-					cout << numToString(x[1]) << " " << operators[x[2]] << " ((" << numToString(x[3]) << " " << operators[x[4]] << " " << numToString(x[5]) << ") " << operators[x[6]] << " " << numToString(x[7]) << ")" << endl;
-					break;
-			}
-		}
+    if (s.size() != 0) {
+		cout << endl << GREEN << s.size() << " Solutions Found" << RESET << endl;
 	} else {
-		string filename;
+		cout << endl << GREEN << "No Solutions Found" << RESET << endl;
+	}
 
-		cout << endl << "Input Filename: ";
-		cin >> filename;
-
-		ofstream MyFile("../test/" + filename + ".txt");
-
-		// Write ke file
-		if (s.size() != 0) {
-			MyFile << s.size() << " Solutions Found" << endl;
-		} else {
-			MyFile << "No Solutions Found" << endl;
+	std::set< std::vector<int> >::iterator it;
+	for (it = s.begin(); it != s.end(); it++) {
+		const std::vector<int>& x = (*it);
+		switch (x[0]) {
+			case 0:
+				cout << "(" << numToString(x[1]) << " " << operators[x[2]] << " " << numToString(x[3]) << ") " << operators[x[4]] << " (" << numToString(x[5]) << " " << operators[x[6]] << " " << numToString(x[7]) << ")" << endl;
+				break;
+			case 1:
+				cout << "(("<< numToString(x[1]) << " " << operators[x[2]] << " " << numToString(x[3]) << ") " << operators[x[4]] << " " << numToString(x[5]) << ") " << operators[x[6]] << " " << numToString(x[7]) << endl;
+				break;
+			case 2:
+				cout << "(" << numToString(x[1]) << " " << operators[x[2]] << " (" << numToString(x[3]) << " " << operators[x[4]] << " " << numToString(x[5]) << ")) " << operators[x[6]] << " " << numToString(x[7]) << endl;
+				break;
+			case 3:
+				cout << numToString(x[1]) << " " << operators[x[2]] << " " << "(" << numToString(x[3]) << " " << operators[x[4]] << " (" << numToString(x[5]) << " " << operators[x[6]] << " " << numToString(x[7]) << "))" << endl;
+				break;
+			case 4:
+				cout << numToString(x[1]) << " " << operators[x[2]] << " ((" << numToString(x[3]) << " " << operators[x[4]] << " " << numToString(x[5]) << ") " << operators[x[6]] << " " << numToString(x[7]) << ")" << endl;
+				break;
 		}
-
-		std::set< std::vector<int> >::iterator itr;
-		for (itr = s.begin(); itr != s.end(); itr++) {
-			const std::vector<int>& x = (*itr);
-			switch (x[0]) {
-				case 0:
-					MyFile << "(" << numToString(x[1]) << " " << operators[x[2]] << " " << numToString(x[3]) << ") " << operators[x[4]] << " (" << numToString(x[5]) << " " << operators[x[6]] << " " << numToString(x[7]) << ")" << endl;
-					break;
-				case 1:
-					MyFile << "(("<< numToString(x[1]) << " " << operators[x[2]] << " " << numToString(x[3]) << ") " << operators[x[4]] << " " << numToString(x[5]) << ") " << operators[x[6]] << " " << numToString(x[7]) << endl;
-					break;
-				case 2:
-					MyFile << "(" << numToString(x[1]) << " " << operators[x[2]] << " (" << numToString(x[3]) << " " << operators[x[4]] << " " << numToString(x[5]) << ")) " << operators[x[6]] << " " << numToString(x[7]) << endl;
-					break;
-				case 3:
-					MyFile << numToString(x[1]) << " " << operators[x[2]] << " " << "(" << numToString(x[3]) << " " << operators[x[4]] << " (" << numToString(x[5]) << " " << operators[x[6]] << " " << numToString(x[7]) << "))" << endl;
-					break;
-				case 4:
-					MyFile << numToString(x[1]) << " " << operators[x[2]] << " ((" << numToString(x[3]) << " " << operators[x[4]] << " " << numToString(x[5]) << ") " << operators[x[6]] << " " << numToString(x[7]) << ")" << endl;
-					break;
-			}
-		}
-
-		// Close file
-		MyFile.close();
-
-		cout << GREEN << "File saved succesfully" << RESET << endl;
 	}
 
 	cout << GREEN << "Execution Time: " << RESET << exec.count() << " nanoseconds" << endl;
 	cout << GREEN << "Execution Time: " << RESET << exec.count() / 1000 << " microseconds" << endl;
 
+	if (s.size() != 0) {
+		command3();
+	    int input2;
 
+		input2 = inputOneTwo();
+
+		if (input2 == 1) {
+			string filename;
+
+			cout << endl << "Input Filename: ";
+			cin >> filename;
+
+			ofstream MyFile("../test/" + filename + ".txt");
+
+			// Write ke file
+			MyFile << s.size() << " Solutions Found" << endl;
+
+			std::set< std::vector<int> >::iterator itr;
+			for (itr = s.begin(); itr != s.end(); itr++) {
+				const std::vector<int>& x = (*itr);
+				switch (x[0]) {
+					case 0:
+						MyFile << "(" << numToString(x[1]) << " " << operators[x[2]] << " " << numToString(x[3]) << ") " << operators[x[4]] << " (" << numToString(x[5]) << " " << operators[x[6]] << " " << numToString(x[7]) << ")" << endl;
+						break;
+					case 1:
+						MyFile << "(("<< numToString(x[1]) << " " << operators[x[2]] << " " << numToString(x[3]) << ") " << operators[x[4]] << " " << numToString(x[5]) << ") " << operators[x[6]] << " " << numToString(x[7]) << endl;
+						break;
+					case 2:
+						MyFile << "(" << numToString(x[1]) << " " << operators[x[2]] << " (" << numToString(x[3]) << " " << operators[x[4]] << " " << numToString(x[5]) << ")) " << operators[x[6]] << " " << numToString(x[7]) << endl;
+						break;
+					case 3:
+						MyFile << numToString(x[1]) << " " << operators[x[2]] << " " << "(" << numToString(x[3]) << " " << operators[x[4]] << " (" << numToString(x[5]) << " " << operators[x[6]] << " " << numToString(x[7]) << "))" << endl;
+						break;
+					case 4:
+						MyFile << numToString(x[1]) << " " << operators[x[2]] << " ((" << numToString(x[3]) << " " << operators[x[4]] << " " << numToString(x[5]) << ") " << operators[x[6]] << " " << numToString(x[7]) << ")" << endl;
+						break;
+				}
+			}
+
+			// Close file
+			MyFile.close();
+
+			cout << GREEN << "File saved succesfully" << RESET << endl;
+		}
+	}
 }
 
 int main () {

@@ -13,7 +13,7 @@
 /* UI and Time */
 #include <ctime>
 #include <windows.h>
-#include <chrono>
+#include <bits/stdc++.h>
 
 using namespace std;
 #define RESET   "\033[0m"
@@ -313,10 +313,8 @@ void app() {
 	}
 
 	/* Execution Time Init */
-	typedef std::chrono::high_resolution_clock Time;
-    typedef std::chrono::nanoseconds ns;
-    typedef std::chrono::duration<float> fsec;
-    auto t0 = Time::now();
+    clock_t start, end;
+    start = clock();
 
 	vector <vector<int>> permute_numbers = permute(numbers);
 	vector <vector<int>> hasil;
@@ -364,9 +362,7 @@ void app() {
 	set <vector<int>> s( hasil.begin(), hasil.end() );
 	hasil.assign( s.begin(), s.end() );
 
-	auto t1 = Time::now();
-    fsec fs = t1 - t0;
-    ns exec = std::chrono::duration_cast<ns>(fs);
+    end = clock();
 
     if (s.size() != 0) {
 		cout << endl << GREEN << s.size() << " Solutions Found" << RESET << endl;
@@ -396,8 +392,9 @@ void app() {
 		}
 	}
 
-	cout << GREEN << "Execution Time: " << RESET << exec.count() << " nanoseconds" << endl;
-	cout << GREEN << "Execution Time: " << RESET << exec.count() / 1000 << " microseconds" << endl;
+	double time_taken = double(end - start) / double(CLOCKS_PER_SEC);
+
+	cout << GREEN << "Execution Time: " << RESET << time_taken << setprecision(6) << " seconds" << endl;
 
 	if (s.size() != 0) {
 		command3();
